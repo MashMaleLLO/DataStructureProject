@@ -5,25 +5,45 @@
     <h2 align = "center" >ClassRoom : DataStructure2564</h2>
     <br>
     <div class="container">
+        {% if user.is_staff == 1 %}
         <div class="row">
-          <div class="col-sm">
-            {% if user.is_staff == 1 %}
-            {% else %}
-            <h4>Please login to join class : </h4>
-                <form action="addIDNameDatastruct" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
+        <div class="col-sm">
+            <h4>Enter ID to kick out of class: </h4>
+            <form action="dataStructlogout" method="post">
+                {% csrf_token %}
+                <div class = "from-group">
+                    <input type="text" class = "form-control" name="studentID">
                 </div>
-                <div class="col-sm">
-                <h4>Enter ID to exit class : </h4>
-                <form action="dataStructlogout" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
-                </div>
-            {% endif %}
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
         </div>
+        <div class="col-sm">
+            <h4>End class: </h4>
+            <form action="dataEndClass" method="post">
+                {% csrf_token %}
+                <input type="submit" value="EndClass" class="btn btn-primary">
+            </form>
+        </div>
+        </div>
+        {% else %}
+            <div class="row">
+            <div class="col-sm">
+            <h4>Press the button below to join class: </h4>
+            <form action="addIDNameDatastruct" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+            </div>
+            <div class="col-sm">
+            <h4>Enter ID to exit class : </h4>
+            <form action="dataStructlogout" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+            </div>
+            </div>
+        {% endif %}
     </div>
     <!-- <form action="addIDNameDatastruct" method="post">
         {% csrf_token %}
@@ -52,6 +72,7 @@
     {% if registerSucess == True %}
         <p>Register Sucess !!</p>
     {% endif %}
+    
     <!-- Example single danger button -->
     <div class="btn-group">
     <h3>Active Student in Class :</h3>
@@ -74,5 +95,6 @@
             </li>
         {% endfor %}
     </ul>
+    
 
 {% endblock %}

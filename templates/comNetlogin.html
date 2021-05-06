@@ -5,22 +5,45 @@
     <h2 align = "center" >ClassRoom : ComputerNetwork2564</h2>
     <br>
     <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <h4>Please login to join class : </h4>
-            <form action="addIDNameComNet" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-          </div>
-          <div class="col-sm">
-            <h4>Enter ID to exit class : </h4>
-            <form action="comNetlogout" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-          </div>
-        </div>
+        {% if user.is_staff == 1%}
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Enter ID to kick out of class: </h4>
+                    <form action="comNetlogout" method="post">
+                        {% csrf_token %}
+                        <div class = "from-group">
+                            <input type="text" class = "form-control" name="studentID">
+                        </div>
+                        <br>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <h4>End class: </h4>
+                    <form action="comNetEndClass" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="EndClass" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-sm">
+                <h4>Press the button below to join class: </h4>
+                <form action="addIDNameComNet" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </form>
+                </div>
+                <div class="col-sm">
+                <h4>Enter ID to exit class : </h4>
+                <form action="comNetlogout" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </form>
+                </div>
+            </div>
+        {% endif %}
     </div>
     <!-- <form action="addIDNameComNet" method="post">
         {% csrf_token %}
