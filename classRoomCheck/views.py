@@ -5,7 +5,6 @@ from .models import AllClassRooM
 from django.contrib.auth.models import User,auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from django.utils.datastructures import MultiValueDictKeyError
 import time
 # Create your views here.
 
@@ -506,6 +505,7 @@ studentInComnet = DoublyLk()
 studentInComOrg = DoublyLk()
 studentInEpp = DoublyLk()
 studentInProb = DoublyLk()
+allClassIndex = [studentInData,studentInComnet,studentInComOrg,studentInEpp,studentInProb]
 addFormed = False
 datafileisEmpty = False
 comNetfileisEmpty = False
@@ -583,6 +583,7 @@ while True:
 prl.close()
 
 allFile = ['studentInData.txt','studentInComnet.txt','studentInComOrg.txt','studentInEpp.txt','studentInProb.txt']
+
 
 ######################################################################################## ตรวจว่า file ว่างรึเปล่า ####################################################################
 
@@ -822,16 +823,10 @@ def logout(request):
 
 def information(request):
     numinclass = allStudent.size()
-    allClass = Stack(['DataStructure2564',
-    'ComputerNetwork2564',
-    'ComputerOrganized2564',
-    'Probability and Statistic2564',
-    'English for Professional Purpose2564'])
     return render(request,'index.html',
     {
         'className':'Data Structure 2564',
         'student':'62010465 นรวิชญ์ อยู่บัว',
-        'allClass':allClass.items,
         'numinClass':numinclass
     })
 
@@ -881,8 +876,8 @@ def readNowUser():
     else:
         nowidS = wholePartUser.split()[0]
         nowUser = wholePartUser.split()[1] + " " + wholePartUser.split()[2]
-        print("HIIIIIIIIIIIIIII",nowidS,nowUser)
         return nowidS,nowUser,0
+
 
 
 ########################################################################## ส่วน login Data ############################################################################################
@@ -890,6 +885,7 @@ def readNowUser():
 def visualize(inOut,idS,name,htmlFile,studentIN,allFilenIndex):
     registerSucess = False
     alreadyRegister = False
+    alreadyInOtherClass = False
     addFormed = True
     named_tuple = time.localtime() # get struct_time
     time_string = time.strftime("%d/%m/%Y %H:%M:%S", named_tuple)
@@ -898,7 +894,7 @@ def visualize(inOut,idS,name,htmlFile,studentIN,allFilenIndex):
     if idS == '' or name  == '':
         alreadylogin = False
         noInDataBase = False
-        return 1,alreadylogin,noInDataBase,addFormed,alreadyRegister,registerSucess
+        return 1,alreadylogin,noInDataBase,addFormed,alreadyRegister,registerSucess,alreadyInOtherClass
     else:
         idandNameOnly = str(idS) + " " + str(name)
         timePlusIdname = str(idS) + " " + str(name) + " login at " + " " + str(time_string)
@@ -917,8 +913,16 @@ def visualize(inOut,idS,name,htmlFile,studentIN,allFilenIndex):
                 break
             else:
                 pass
+        for i in allClassIndex:
+            for j in i.getlst():
+                a = j.split()
+                if a[0] == idS:
+                    alreadyInOtherClass = True
+                    break
+                else:
+                    pass
         if inOut == 1:
-            if alreadylogin == False and noInDataBase == False:
+            if alreadylogin == False and noInDataBase == False and alreadyInOtherClass == False:
                 if studentIN.isEmpty():
                     f = open(allFile[allFilenIndex], 'a', encoding="utf8")
                     f.write(timePlusIdname + ',')
@@ -952,7 +956,7 @@ def visualize(inOut,idS,name,htmlFile,studentIN,allFilenIndex):
                 addFormed = False
             else:
                 pass
-        return 0,alreadylogin,noInDataBase,addFormed,alreadyRegister,registerSucess
+        return 0,alreadylogin,noInDataBase,addFormed,alreadyRegister,registerSucess,alreadyInOtherClass
 
 
 def dataStructloginAddIDandName(request):
@@ -961,7 +965,7 @@ def dataStructloginAddIDandName(request):
     thislis = []
     thislis = visualize(1,idS,name,'dataStructlogin.html',studentInData,0)
     return render(request,'dataStructlogin.html',{'studentInData':studentInData.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 
 def dataStructlogout(request):
@@ -973,7 +977,7 @@ def dataStructlogout(request):
     thislis = []
     thislis = visualize(0,idS,name,'dataStructlogin.html',studentInData,0)
     return render(request,'dataStructlogin.html',{'studentInData':studentInData.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def dataEndClass(request):
     thislis = []
@@ -986,7 +990,7 @@ def dataEndClass(request):
             name = a[1]
             thislis = visualize(0,idS,name,'dataStructlogin.html',studentInData,0)
         return render(request,'dataStructlogin.html',{'studentInData':studentInData.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-            'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 
 
@@ -1035,7 +1039,7 @@ def comNetloginAddIDandName(request):
     thislis = []
     thislis = visualize(1,idS,name,'comNetlogin.html',studentInComnet,1)
     return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comNetlogout(request):
     idS = readNowUser()[0]
@@ -1046,7 +1050,7 @@ def comNetlogout(request):
     thislis = []
     thislis = visualize(0,idS,name,'comNetlogin.html',studentInComnet,1)
     return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comNetEndClass(request):
     thislis = []
@@ -1059,7 +1063,7 @@ def comNetEndClass(request):
             name = a[1]
             thislis = visualize(0,idS,name,'comNetlogin.html',studentInComnet,1)
         return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-            'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comNetMinMaxID(request):
     arr = []
@@ -1104,7 +1108,7 @@ def comOrgloginAddIDandName(request):
     thislis = []
     thislis = visualize(1,idS,name,'comOrglogin.html',studentInComOrg,2)
     return render(request,'comOrglogin.html',{'studentInComOrg':studentInComOrg.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comOrglogout(request):
     idS = readNowUser()[0]
@@ -1115,7 +1119,7 @@ def comOrglogout(request):
     thislis = []
     thislis = visualize(0,idS,name,'comOrglogin.html',studentInComOrg,2)
     return render(request,'comOrglogin.html',{'studentInComOrg':studentInComOrg.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comOrgEndClass(request):
     thislis = []
@@ -1128,7 +1132,7 @@ def comOrgEndClass(request):
             name = a[1]
             thislis = visualize(0,idS,name,'comOrglogin.html',studentInComOrg,2)
         return render(request,'comOrglogin.html',{'studentInComOrg':studentInComOrg.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def comOrgMinMaxID(request):
     arr = []
@@ -1173,7 +1177,7 @@ def ePPloginAddIDandName(request):
     thislis = []
     thislis = visualize(1,idS,name,'epplogin.html',studentInEpp,3)
     return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def ePPlogout(request):
     idS = readNowUser()[0]
@@ -1185,7 +1189,7 @@ def ePPlogout(request):
     thislis = []
     thislis = visualize(0,idS,name,'epplogin.html',studentInEpp,3)
     return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def ePPEndClass(request):
     thislis = []
@@ -1198,7 +1202,7 @@ def ePPEndClass(request):
             name = a[1]
             thislis = visualize(0,idS,name,'epplogin.html',studentInEpp,3)
         return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 
 def ePPMinMaxID(request):
@@ -1244,7 +1248,7 @@ def probloginAddIDandName(request):
     thislis = []
     thislis = visualize(1,idS,name,'problogin.html',studentInProb,4)
     return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def problogout(request):
     idS = readNowUser()[0]
@@ -1256,7 +1260,7 @@ def problogout(request):
     thislis = []
     thislis = visualize(0,idS,name,'problogin.html',studentInProb,4)
     return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 def probEndClass(request):
     thislis = []
@@ -1269,7 +1273,7 @@ def probEndClass(request):
             name = a[1]
             thislis = visualize(0,idS,name,'problogin.html',studentInProb,4)
         return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
-        'alreadyRegister':thislis[4],'registerSucess':thislis[5]})
+        'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6]})
 
 
 def probMinMaxID(request):
@@ -1309,6 +1313,46 @@ def probMaxMinDay(request):
 
 
 ########################################################################## Register ###############################################################
+
+
+def userInformation(request):
+    User = get_user_model()
+    users = User.objects.all()
+    userlist = User.objects.values()
+    thisEmail = ''
+    nowClass = 0
+    studyIn = ""
+    name = readNowUser()[1]
+    idS = readNowUser()[0]
+    j = 0
+    while j < len(allClassIndex):
+        for k in allClassIndex[j].getlst():
+            a = k.split()
+            if str(a[0]) == str(readNowUser()[0]):
+                nowClass = j
+                break
+        j += 1
+    i = 1
+    while i < len(userlist):
+        if int(userlist[i]['id']) == int(readNowUser()[0]):
+            thisEmail += str(userlist[i]['email'])
+            break
+        i += 1
+    print("Hiii",thisEmail)
+    if nowClass == 0:
+        studyIn = "DataStruct"
+    elif nowClass == 1:
+        studyIn = "Computer Network"
+    elif nowClass == 2:
+        studyIn = "Computer Organize"
+    elif nowClass == 3:
+        studyIn = "English for professional purpose"
+    elif nowClass == 4:
+        studyIn = "Probability and Statistic"
+    else:
+        studyIn = "None"
+    return render(request, 'thisUserData.html',{'name':name,'id':idS,'email':thisEmail,'studyIn':studyIn})
+
 def registerPage(request):
     # data = User.objects.order_by('id')
     User = get_user_model()
@@ -1408,3 +1452,6 @@ def addFormedRegisterAsTeach(request):
     else:
         messages.info(request,'Your password does not match')
         return redirect('/registerAsTeach')
+
+def test001(request):
+    return render(request, 'test001.html')

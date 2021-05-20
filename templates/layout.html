@@ -23,10 +23,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="/classStatus">Student List</a>
               </li>
-
               {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="#">Hi {{user.first_name}}</a>
+                  {% if user.is_staff == 1 %}
+                    <a class="nav-link" aria-current="page" href="#">Hi {{user.first_name}}</a>
+                  {% else %}
+                    <a class="nav-link" aria-current="page" href="/userInformation">Hi {{user.first_name}}</a>
+                  {% endif %}
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/logout">Logout</a>

@@ -29,14 +29,14 @@
         {% else %}
             <div class="row">
             <div class="col-sm">
-            <h4>Press the button below to join class: </h4>
+            <h4>Press the button below to join class :</h4>
             <form action="addIDNameDatastruct" method="post">
                 {% csrf_token %}
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
             </div>
             <div class="col-sm">
-            <h4>Enter ID to exit class : </h4>
+            <h4>Press the button to exit class :</h4>
             <form action="dataStructlogout" method="post">
                 {% csrf_token %}
                 <input type="submit" value="Submit" class="btn btn-primary">
@@ -62,6 +62,10 @@
         {% if addFormed == True %}
             <p>You are In Class !!</p>
         {% endif %}
+    {% else %}
+        {% if alreadyInOtherClass == True %}
+            <p>You are In another class !!</p>
+        {% endif %}
     {% endif %}
     {% if noInDataBase == True %}
         <p>You are not Student !!!</p>
@@ -72,6 +76,7 @@
     {% if registerSucess == True %}
         <p>Register Sucess !!</p>
     {% endif %}
+    
     
     <!-- Example single danger button -->
     <div class="btn-group">

@@ -36,7 +36,7 @@
                 </form>
                 </div>
                 <div class="col-sm">
-                <h4>Enter ID to exit class : </h4>
+                <h4>Press the button to exit class :</h4>
                 <form action="comOrglogout" method="post">
                     {% csrf_token %}
                     <input type="submit" value="Submit" class="btn btn-primary">
@@ -50,6 +50,10 @@
     {% if alreadylogin == True %}
         {% if addFormed == True %}
             <p>You are In Class !!</p>
+        {% endif %}
+    {% else %}
+        {% if alreadyInOtherClass == True %}
+            <p>You are In another class !!</p>
         {% endif %}
     {% endif %}
     {% if noInDataBase == True %}
