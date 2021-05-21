@@ -244,7 +244,7 @@ class BST:
         else:
             curr = self.root
             while True:
-                if data < curr.data:
+                if int(data.split()[0]) < int(curr.data.split()[0]):
                     if curr.left is None:
                         curr.left = NodeBsT(data)
                         break
@@ -1570,6 +1570,15 @@ def addFormedRegister(request):
             email = email
             )
             user.save()
+            wholePart = str(idS) + " " + str(name) + " " + str(surname)
+            f = open("mySQLallstudent.txt", 'a', encoding="utf8")
+            f.write(wholePart + ',')
+            print('Writing to file completed')
+            f.close()
+            allStudentBST.insert(wholePart)
+            while not allStudent.isEmpty():
+                allStudent.pop()
+            inorder(allStudentBST.root)
             return redirect('/')
     else:
         messages.info(request,'Your password does not match')
