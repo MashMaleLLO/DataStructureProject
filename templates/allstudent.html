@@ -14,6 +14,16 @@
                 <br>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
+            <br>
+            {% if messages %}
+                <center>
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in messages %}
+                            <b>{{message}}</b>
+                        {% endfor %}
+                    </div>
+                </center>
+            {% endif %}
         </div>
     </div>
     <br>

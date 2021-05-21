@@ -868,45 +868,48 @@ def allStudentName(request):
 
 def searchInAllStudent(request):
     idS = request.POST['studentID']
-    IDD = bi_search(0, len(allStudent.items) - 1, sorted(allStudent.items), int(idS))
-    if IDD == False:
-        messages.info(request,'Not Found')
+    if idS == "":
         return redirect('/classStatus')
     else:
-        name = str(IDD.split()[1] + " " + IDD.split()[2])
-        User = get_user_model()
-        users = User.objects.all()
-        userlist = User.objects.values()
-        thisEmail = ''
-        nowClass = 999
-        studyIn = ""
-        j = 0
-        while j < len(allClassIndex):
-            for k in allClassIndex[j].getlst():
-                a = k.split()
-                if str(a[0]) == str(IDD.split()[0]):
-                    nowClass = j
-                    break
-            j += 1
-        i = 1
-        while i < len(userlist):
-            if int(userlist[i]['id']) == int(IDD.split()[0]):
-                thisEmail += str(userlist[i]['email'])
-                break
-            i += 1
-        if nowClass == 0:
-            studyIn = "DataStruct"
-        elif nowClass == 1:
-            studyIn = "Computer Network"
-        elif nowClass == 2:
-            studyIn = "Computer Organize"
-        elif nowClass == 3:
-            studyIn = "English for professional purpose"
-        elif nowClass == 4:
-            studyIn = "Probability and Statistic"
+        IDD = bi_search(0, len(allStudent.items) - 1, sorted(allStudent.items), int(idS))
+        if IDD == False:
+            messages.info(request,'Not Found')
+            return redirect('/classStatus')
         else:
-            studyIn = "None"
-        return render(request, 'thisUserData.html',{'name':name,'id':idS,'email':thisEmail,'studyIn':studyIn})
+            name = str(IDD.split()[1] + " " + IDD.split()[2])
+            User = get_user_model()
+            users = User.objects.all()
+            userlist = User.objects.values()
+            thisEmail = ''
+            nowClass = 999
+            studyIn = ""
+            j = 0
+            while j < len(allClassIndex):
+                for k in allClassIndex[j].getlst():
+                    a = k.split()
+                    if str(a[0]) == str(IDD.split()[0]):
+                        nowClass = j
+                        break
+                j += 1
+            i = 1
+            while i < len(userlist):
+                if int(userlist[i]['id']) == int(IDD.split()[0]):
+                    thisEmail += str(userlist[i]['email'])
+                    break
+                i += 1
+            if nowClass == 0:
+                studyIn = "DataStruct"
+            elif nowClass == 1:
+                studyIn = "Computer Network"
+            elif nowClass == 2:
+                studyIn = "Computer Organize"
+            elif nowClass == 3:
+                studyIn = "English for professional purpose"
+            elif nowClass == 4:
+                studyIn = "Probability and Statistic"
+            else:
+                studyIn = "None"
+            return render(request, 'thisUserData.html',{'name':name,'id':idS,'email':thisEmail,'studyIn':studyIn})
 
 
 def dataStructlogin(request):
@@ -1117,36 +1120,40 @@ def dataEndClass(request):
 
 
 def dataMinMaxID(request):
+    isStart = readClassStatus("isStartData.txt")
     arr = []
     arr = studentInData.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 0)
     print(arr)
-    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr})
+    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr,'isStart':isStart})
 
 def dataMaxMinID(request):
+    isStart = readClassStatus("isStartData.txt")
     arr = []
     arr = studentInData.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 1)
     print(arr)
-    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr})
+    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr,'isStart':isStart})
 
 def dataMinMaxDay(request):
+    isStart = readClassStatus("isStartData.txt")
     arr = []
     arr = studentInData.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 2)
     print(arr)
-    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr})
+    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr,'isStart':isStart})
 
 def dataMaxMinDay(request):
+    isStart = readClassStatus("isStartData.txt")
     arr = []
     arr = studentInData.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 3)
     print(arr)
-    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr})
+    return render(request,'dataStructlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInData':arr,'isStart':isStart})
 
 
 
@@ -1195,36 +1202,40 @@ def comNetEndClass(request):
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
 def comNetMinMaxID(request):
+    isStart = readClassStatus("isStartNet.txt")
     arr = []
     arr = studentInComnet.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 0)
     print(arr)
-    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr})
+    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr,'isStart':isStart})
 
 def comNetMaxMinID(request):
+    isStart = readClassStatus("isStartNet.txt")
     arr = []
     arr = studentInComnet.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 1)
     print(arr)
-    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr})
+    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr,'isStart':isStart})
 
 def comNetMinMaxDay(request):
+    isStart = readClassStatus("isStartNet.txt")
     arr = []
     arr = studentInComnet.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 2)
     print(arr)
-    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr})
+    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr,'isStart':isStart})
 
 def comNetMaxMinDay(request):
+    isStart = readClassStatus("isStartNet.txt")
     arr = []
     arr = studentInComnet.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 3)
     print(arr)
-    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr})
+    return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':arr,'isStart':isStart})
             
 
 ########################################################################## ส่วน login Comnet ############################################################################################
@@ -1271,36 +1282,40 @@ def comOrgEndClass(request):
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
 def comOrgMinMaxID(request):
+    isStart = readClassStatus("isStartOrg.txt")
     arr = []
     arr = studentInComOrg.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 0)
     print(arr)
-    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr})
+    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr,'isStart':isStart})
 
 def comOrgMaxMinID(request):
+    isStart = readClassStatus("isStartOrg.txt")
     arr = []
     arr = studentInComOrg.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 1)
     print(arr)
-    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr})
+    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr,'isStart':isStart})
 
 def comOrgMinMaxDay(request):
+    isStart = readClassStatus("isStartOrg.txt")
     arr = []
     arr = studentInComOrg.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 2)
     print(arr)
-    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr})
+    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr,'isStart':isStart})
 
 def comOrgMaxMinDay(request):
+    isStart = readClassStatus("isStartOrg.txt")
     arr = []
     arr = studentInComOrg.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 3)
     print(arr)
-    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr})
+    return render(request,'comOrglogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComOrg':arr,'isStart':isStart})
   
 
 ########################################################################## ส่วน login Comorg ############################################################################################
@@ -1349,36 +1364,40 @@ def ePPEndClass(request):
 
 
 def ePPMinMaxID(request):
+    isStart = readClassStatus("isStartEpp.txt")
     arr = []
     arr = studentInEpp.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 0)
     print(arr)
-    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr})
+    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr,'isStart':isStart})
 
 def ePPMaxMinID(request):
+    isStart = readClassStatus("isStartEpp.txt")
     arr = []
     arr = studentInEpp.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 1)
     print(arr)
-    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr})
+    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr,'isStart':isStart})
 
 def ePPMinMaxDay(request):
+    isStart = readClassStatus("isStartEpp.txt")
     arr = []
     arr = studentInEpp.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 2)
     print(arr)
-    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr})
+    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr,'isStart':isStart})
 
 def ePPMaxMinDay(request):
+    isStart = readClassStatus("isStartEpp.txt")
     arr = []
     arr = studentInEpp.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 3)
     print(arr)
-    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr})
+    return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInEpp':arr,'isStart':isStart})
     
 ########################################################################## ส่วน login Epp ############################################################################################
 
@@ -1427,36 +1446,40 @@ def probEndClass(request):
 
 
 def probMinMaxID(request):
+    isStart = readClassStatus("isStartProb.txt")
     arr = []
     arr = studentInProb.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 0)
     print(arr)
-    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr})
+    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr,'isStart':isStart})
 
 def probMaxMinID(request):
+    isStart = readClassStatus("isStartProb.txt")
     arr = []
     arr = studentInProb.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 1)
     print(arr)
-    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr})
+    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr,'isStart':isStart})
 
 def probMinMaxDay(request):
+    isStart = readClassStatus("isStartProb.txt")
     arr = []
     arr = studentInProb.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 2)
     print(arr)
-    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr})
+    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr,'isStart':isStart})
 
 def probMaxMinDay(request):
+    isStart = readClassStatus("isStartProb.txt")
     arr = []
     arr = studentInProb.getlst().copy()
     n = len(arr)
     quickSort(arr, 0, n-1, 3)
     print(arr)
-    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr})
+    return render(request,'problogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInProb':arr,'isStart':isStart})
 
 
 ########################################################################## ส่วน login Prob ############################################################################################
