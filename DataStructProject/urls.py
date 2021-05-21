@@ -23,6 +23,7 @@ urlpatterns = [
     path('home/', views.information,name='UserContact'),
     path('register/',views.registerPage),
     path('userInformation/',views.userInformation),
+    path('classStatus/searchInAllStudent',views.searchInAllStudent),
     path('register/addFormedRegister',views.addFormedRegister),
     path('registerAsTeach/',views.registerPageAsTeach),
     path('registerAsTeach/addFormedRegisterAsTeach',views.addFormedRegisterAsTeach),

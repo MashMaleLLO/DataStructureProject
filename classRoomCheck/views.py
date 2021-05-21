@@ -485,6 +485,17 @@ def quickSort(arr, low, high, isMM):
             pi = partitionMax(arr, low, high)
         quickSort(arr, low, pi-1, isMM)
         quickSort(arr, pi+1, high, isMM)
+
+def bi_search(left, right, lst, key):
+    if left <= right:
+        mid = (left + right) // 2
+        if int(lst[mid].split()[0]) < int(key):
+            return bi_search(mid + 1, right, lst, key)
+        elif int(lst[mid].split()[0]) > int(key):
+            return bi_search(left, mid - 1, lst, key)
+        else:
+            return lst[mid]
+    return False
   
   
   
@@ -854,6 +865,49 @@ def allStudentName(request):
     {
         'allStudent':allStudent.items
     })
+
+def searchInAllStudent(request):
+    idS = request.POST['studentID']
+    IDD = bi_search(0, len(allStudent.items) - 1, sorted(allStudent.items), int(idS))
+    if IDD == False:
+        messages.info(request,'Not Found')
+        return redirect('/classStatus')
+    else:
+        name = str(IDD.split()[1] + " " + IDD.split()[2])
+        User = get_user_model()
+        users = User.objects.all()
+        userlist = User.objects.values()
+        thisEmail = ''
+        nowClass = 999
+        studyIn = ""
+        j = 0
+        while j < len(allClassIndex):
+            for k in allClassIndex[j].getlst():
+                a = k.split()
+                if str(a[0]) == str(IDD.split()[0]):
+                    nowClass = j
+                    break
+            j += 1
+        i = 1
+        while i < len(userlist):
+            if int(userlist[i]['id']) == int(IDD.split()[0]):
+                thisEmail += str(userlist[i]['email'])
+                break
+            i += 1
+        if nowClass == 0:
+            studyIn = "DataStruct"
+        elif nowClass == 1:
+            studyIn = "Computer Network"
+        elif nowClass == 2:
+            studyIn = "Computer Organize"
+        elif nowClass == 3:
+            studyIn = "English for professional purpose"
+        elif nowClass == 4:
+            studyIn = "Probability and Statistic"
+        else:
+            studyIn = "None"
+        return render(request, 'thisUserData.html',{'name':name,'id':idS,'email':thisEmail,'studyIn':studyIn})
+
 
 def dataStructlogin(request):
     isStart = readClassStatus("isStartData.txt")
