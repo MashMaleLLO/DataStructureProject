@@ -6,57 +6,63 @@
     <br>
     <div class="container">
         {% if user.is_staff == 1 %}
-        <div class="row">
-        <div class="col-sm">
-            <h4>Enter ID to kick out of class: </h4>
-            <form action="dataStructlogout" method="post">
-                {% csrf_token %}
-                <div class = "from-group">
-                    <input type="text" class = "form-control" name="studentID">
+            {% if isStart == True %}
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Enter ID to kick out of class: </h4>
+                        <form action="dataStructlogout" method="post">
+                            {% csrf_token %}
+                            <div class = "from-group">
+                                <input type="text" class = "form-control" name="studentID">
+                            </div>
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <h4>End class: </h4>
+                        <form action="dataEndClass" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="EndClass" class="btn btn-primary">
+                        </form>
+                    </div>
                 </div>
-                <br>
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-        </div>
-        <div class="col-sm">
-            <h4>End class: </h4>
-            <form action="dataEndClass" method="post">
-                {% csrf_token %}
-                <input type="submit" value="EndClass" class="btn btn-primary">
-            </form>
-        </div>
-        </div>
+            {% else %}
+                <div class='row'>
+                    <div class='col-sm'>
+                        <h4>Press the button to start a class</h4>
+                        <form action="dataStructStart" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Start" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
         {% else %}
-            <div class="row">
-            <div class="col-sm">
-            <h4>Press the button below to join class :</h4>
-            <form action="addIDNameDatastruct" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-            </div>
-            <div class="col-sm">
-            <h4>Press the button to exit class :</h4>
-            <form action="dataStructlogout" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Submit" class="btn btn-primary">
-            </form>
-            </div>
-            </div>
+            {% if isStart == True %}
+                <div class="row">
+                    <div class="col-sm">
+                    <h4>Press the button below to join class :</h4>
+                    <form action="addIDNameDatastruct" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                    </div>
+                    <div class="col-sm">
+                    <h4>Press the button to exit class :</h4>
+                    <form action="dataStructlogout" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                    </div>
+                </div>
+            {% else %}
+                <h4>This Class is Now Close</h4>
+            {% endif %}
         {% endif %}
     </div>
-    <!-- <form action="addIDNameDatastruct" method="post">
-        {% csrf_token %}
-        <div class = "from-group">
-            <label for="">Student ID : </label>
-            <input type="text" class = "form-control" name="studentID">
-        </div>
-        <div class = "from-group">
-            <label for="">Name-Surname : </label>
-            <input type="text" class = "form-control" name="studentName">
-        </div>
-        <input type="submit" value="Join Class Room" class="btn btn-primary">
-    </form> -->
+
+    
     <br>
     {% if alreadylogin == True %}
         {% if addFormed == True %}
@@ -79,27 +85,27 @@
     
     
     <!-- Example single danger button -->
-    <div class="btn-group">
-    <h3>Active Student in Class :</h3>
-    &emsp;
-    <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Sorted by :
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="dataMinMaxID">Id น้อยไปมาก</a></li>
-        <li><a class="dropdown-item" href="dataMaxMinID">Id มากไปน้อย</a></li>
-        <li><a class="dropdown-item" href="dataMaxMinDay">Time lastest</a></li>
-        <li><a class="dropdown-item" href="dataMinMaxDay">Time earliest</a></li>
-    </ul>
-    </div>
-    <ul>
-        <br>
-        {% for i in studentInData %}
-            <li>
-                <p>{{i}}</p>
-            </li>
-        {% endfor %}
-    </ul>
-    
-
+    {% if isStart == True %}
+        <div class="btn-group">
+        <h3>Active Student in Class :</h3>
+        &emsp;
+        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Sorted by :
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="dataMinMaxID">Id น้อยไปมาก</a></li>
+            <li><a class="dropdown-item" href="dataMaxMinID">Id มากไปน้อย</a></li>
+            <li><a class="dropdown-item" href="dataMaxMinDay">Time lastest</a></li>
+            <li><a class="dropdown-item" href="dataMinMaxDay">Time earliest</a></li>
+        </ul>
+        </div>
+        <ul>
+            <br>
+            {% for i in studentInData %}
+                <li>
+                    <p>{{i}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

@@ -31,40 +31,34 @@
                     <a class="nav-link" aria-current="page" href="/userInformation">Hi {{user.first_name}}</a>
                   {% endif %}
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ClassRoom
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/dataStructlogin">DataStructure2564</a></li>
+                    <li><a class="dropdown-item" href="/comNetlogin">ComputerNetwork2564</a></li>
+                    <li><a class="dropdown-item" href="/comOrglogin">ComputerOrganized2564</a></li>
+                    <li><a class="dropdown-item" href="/problogin">Probability and Statistic2564</a></li>
+                    <li><a class="dropdown-item" href="/epplogin">English for Professional Purpose2564</a></li>
+                  </ul>
                 </li>
-              {% else %}
+              {% endif %}
+            </ul>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+              </li>
+            {% else %}
+              <form class="d-flex">
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/register">Registeration</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/">Login</a>
                 </li>
-              {% endif %}
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  ClassRoom login
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/dataStructlogin">DataStructure2564</a></li>
-                  <li><a class="dropdown-item" href="/comNetlogin">ComputerNetwork2564</a></li>
-                  <li><a class="dropdown-item" href="/comOrglogin">ComputerOrganized2564</a></li>
-                  <li><a class="dropdown-item" href="/problogin">Probability and Statistic2564</a></li>
-                  <li><a class="dropdown-item" href="/epplogin">English for Professional Purpose2564</a></li>
-                  <!-- <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                </ul>
-              </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li> -->
-            </ul>
-            <!-- <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
+              </form>
+            {% endif %}
           </div>
         </div>
     </nav>

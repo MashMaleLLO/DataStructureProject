@@ -6,46 +6,63 @@
     <br>
     <div class="container">
         {% if user.is_staff == 1%}
-            <div class="row">
-                <div class="col-sm">
-                    <h4>Enter ID to kick out of class: </h4>
-                    <form action="comOrglogout" method="post">
+            {% if isStart == True %}
+                <div class="row">
+                    <div class="col-sm">
+                        <h4>Enter ID to kick out of class: </h4>
+                        <form action="comOrglogout" method="post">
+                            {% csrf_token %}
+                            <div class = "from-group">
+                                <input type="text" class = "form-control" name="studentID">
+                            </div>
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <h4>End class: </h4>
+                        <form action="comOrgEndClass" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="EndClass" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class='row'>
+                    <div class='col-sm'>
+                        <h4>Press the button to start a class</h4>
+                        <form action="comOrgStart" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Start" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            {% if isStart == True %}
+                <div class="row">
+                    <div class="col-sm">
+                    <h4>Press the button below to join class: </h4>
+                    <form action="addIDNameComOrg" method="post">
                         {% csrf_token %}
-                        <div class = "from-group">
-                            <input type="text" class = "form-control" name="studentID">
-                        </div>
-                        <br>
                         <input type="submit" value="Submit" class="btn btn-primary">
                     </form>
-                </div>
-                <div class="col-sm">
-                    <h4>End class: </h4>
-                    <form action="comOrgEndClass" method="post">
+                    </div>
+                    <div class="col-sm">
+                    <h4>Press the button to exit class :</h4>
+                    <form action="comOrglogout" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="EndClass" class="btn btn-primary">
+                        <input type="submit" value="Submit" class="btn btn-primary">
                     </form>
+                    </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="row">
-                <div class="col-sm">
-                <h4>Press the button below to join class: </h4>
-                <form action="addIDNameComOrg" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
-                </div>
-                <div class="col-sm">
-                <h4>Press the button to exit class :</h4>
-                <form action="comOrglogout" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
-                </div>
-            </div>
+            {% else %}
+                <h4>This Class is Now Close</h4>
+            {% endif %}   
         {% endif %}
-        
     </div>
+
+
     <br>
     {% if alreadylogin == True %}
         {% if addFormed == True %}
@@ -65,6 +82,9 @@
     {% if registerSucess == True %}
         <p>Register Sucess !!</p>
     {% endif %}
+
+
+    {% if isStart == True %}
     <div class="btn-group">
         <h3>Active Student in Class :</h3>
         &emsp;
@@ -86,5 +106,5 @@
             </li>
         {% endfor %}
     </ul>
-
+    {% endif %}
 {% endblock %}
