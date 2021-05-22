@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static from static %}
 {% block content %}
     <br>
     <h2>Explore Your ClassRoom</h2>
@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% static 'datajpg.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Data Structure and Algorithum 2564</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% static 'net.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Computer Network 2564</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% static 'org.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Computer Organized and Assembly language 2564</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -51,9 +51,17 @@
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% static 'eppD.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Englsih for Professional Purpose 2564</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">More Detail</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'prob.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Probability and Statistic 2564</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   <a href="#" class="btn btn-primary">More Detail</a>
                 </div>

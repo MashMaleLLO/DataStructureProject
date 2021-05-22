@@ -81,3 +81,4 @@ urlpatterns = [
     path('problogin/probMaxMinDay',views.probMaxMinDay)
 ]
 
+urlpatterns += staticfiles_urlpatterns()
