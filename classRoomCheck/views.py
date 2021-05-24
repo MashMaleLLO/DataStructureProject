@@ -973,6 +973,9 @@ def test(request):
     data = AllClassRooM.objects.all()
     return render(request,'test.html',{'AllClassRooM':data})
 
+def aboutus(request):
+    return render(request,'aboutus.html')
+
 def readNowUser():
     wholePartUser = ''
     nowUser = ''

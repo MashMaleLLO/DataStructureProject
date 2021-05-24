@@ -1,29 +1,33 @@
 {% extends 'layout.html' %}
-
+{% load static from static %}
 {% block content %}
     <br>
-    <h2 align = "center" >ClassRoom : DataStructure2564</h2>
+
+    <h1 style="display: inline;"> <img src="{% static '16.png' %}" align="right" alt="15.png" width="100" height="auto" ></h1>
+    <h2 style="display: inline;">ClassRoom > DataStructure 2564</h2>
+    <br>
+    <br>
     <br>
     <div class="container">
         {% if user.is_staff == 1 %}
             {% if isStart == True %}
                 <div class="row">
                     <div class="col-sm">
-                        <h4>Enter ID to kick out of class: </h4>
+                        <sh4>Enter ID to kick out of class: </sh4>
                         <form action="dataStructlogout" method="post">
                             {% csrf_token %}
                             <div class = "from-group">
                                 <input type="text" class = "form-control" name="studentID">
                             </div>
                             <br>
-                            <input type="submit" value="Submit" class="btn btn-primary">
+                            <input type="submit" value="Submit" class="btn btn-dark text-white">
                         </form>
                     </div>
                     <div class="col-sm">
                         <h4>End class: </h4>
                         <form action="dataEndClass" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="EndClass" class="btn btn-primary">
+                            <input type="submit" value="EndClass" class="btn btn-danger text-white">
                         </form>
                     </div>
                 </div>
@@ -33,7 +37,7 @@
                         <h4>Press the button to start a class</h4>
                         <form action="dataStructStart" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Start" class="btn btn-primary">
+                            <input type="submit" value="Start" class="btn btn-info text-white">
                         </form>
                     </div>
                 </div>
@@ -41,20 +45,33 @@
         {% else %}
             {% if isStart == True %}
                 <div class="row">
+
                     <div class="col-sm">
-                    <h4>Press the button below to join class :</h4>
+
+                    <h1 style="display: inline;"> <img src="{% static '7.png' %}" alt="..." width="50" height="auto "></h1>
+                    <h5 style="display: inline;">&nbsp; Press the button below to join class :</h5>
+                    <br>
+                    <br>
                     <form action="addIDNameDatastruct" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Submit" class="btn btn-primary">
+                        <input type="submit" value="Submit" class="btn btn-info text-white">
                     </form>
                     </div>
+
+
                     <div class="col-sm">
-                    <h4>Press the button to exit class :</h4>
+
+                    <h1 style="display: inline;"> <img src="{% static '8.png' %}" alt="..." width="50" height="auto "></h1>
+                    <h5 style="display: inline;">&nbsp; Press the button to exit class :</h5>
+                    <br>
+                    <br>
                     <form action="dataStructlogout" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Submit" class="btn btn-primary">
+                        <input type="submit" value="Submit" class="btn btn-dark text-white">
                     </form>
                     </div>
+
+
                 </div>
             {% else %}
                 <h4>This Class is Now Close</h4>
@@ -86,8 +103,12 @@
     
     <!-- Example single danger button -->
     {% if isStart == True %}
+
+        <br>
+        <h1 style="display: inline;"> <img src="{% static '9.png' %}" alt="..." width="50" height="auto "></h1>
+        <h3 style="display: inline;">&nbsp; Active Student in Class :</h3>
+
         <div class="btn-group">
-        <h3>Active Student in Class :</h3>
         &emsp;
         <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Sorted by :

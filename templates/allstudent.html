@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static from static %}
 
 {% block content %}
     <br>
@@ -12,7 +12,7 @@
                     <input type="text" class = "form-control" name="studentID">
                 </div>
                 <br>
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <input type="submit" value="Submit" class="btn btn-info text-white">
             </form>
             <br>
             {% if messages %}
@@ -27,8 +27,13 @@
         </div>
     </div>
     <br>
-    <h1>All Student</h1>
+
+    <h1 style="display: inline;"> <img src="{% static '13.png' %}" alt="..." width="70" height="auto "></h1>
+    <h1 style="display: inline;">&nbsp; All Student</h1>
+    
+
     <ul>
+        <br>
         {% for i in allStudent %}
         <li>
             <p>{{i}}</p> 
@@ -36,4 +41,5 @@
         {% endfor %}
     </ul>
 
+    
 {% endblock %}

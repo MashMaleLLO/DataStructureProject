@@ -5,15 +5,15 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #17a2b8;
+        background-color: #212529;
         height: 100vh;
     }
     #regis .container #regis-row #regis-column #regis-box {
         margin-top: 80px;
         max-width: 600px;
-        height: 650px;
-        border: 1px solid #9C9C9C;
-        background-color: #EAEAEA;
+        height: 705px;
+        /* border: 1px solid #9C9C9C; */
+        background-color:#0dcaf0;
     }
     #regis .container #regis-row #regis-column #regis-box #regis-form {
         padding: 20px;
@@ -26,7 +26,7 @@
 
 <body>
     <div id="regis">
-        <h3 class="text-center text-white pt-5">Registeration form</h3>
+        <!-- <h3 class="text-center text-white pt-5">Registeration form</h3> -->
         {% if messages %}
         <center>
             <div class="alert alert-danger" role="alert">
@@ -42,41 +42,43 @@
                     <div id="regis-box" class="col-md-12">
                         <form action="addFormedRegister" method="post">
                             {% csrf_token %}
-                            <h3 class="text-center text-info">Register</h3>
+                            <br>
+                            <h3 class="text-center text-dark">Register </h3>
+                            <br>
                             <div class = "from-group">
-                                <label for="" class="text-info">Student ID : </label><br>
+                                <label for="" class="text-white">Student ID : </label><br>
                                 <input type="text" class = "form-control" name="studentID">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Username : </label><br>
+                                <label for="" class="text-white">Username : </label><br>
                                 <input type="text" class = "form-control" name="userName">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Name : </label><br>
+                                <label for="" class="text-white">Name : </label><br>
                                 <input type="text" class = "form-control" name="studentName">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Surname : </label><br>
+                                <label for="" class="text-white">Surname : </label><br>
                                 <input type="text" class = "form-control" name="studentSurname">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Email : </label><br>
+                                <label for="" class="text-white">Email : </label><br>
                                 <input type="email" class = "form-control" name="email">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Password : </label><br>
+                                <label for="" class="text-white">Password : </label><br>
                                 <input type="password" class = "form-control" name="password">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-info">Re-Password : </label><br>
+                                <label for="" class="text-white">Re-Password : </label><br>
                                 <input type="password" class = "form-control" name="repassword">
                             </div>
                             <br>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-info btn-md" value="Register">
+                                <input type="submit" class="btn btn-dark btn-md" value="Register">
                             </div>
                             <div id="login-link" class="text-right">
-                                <a href="/" class="text-info">Login here</a>
+                                <a href="/" class="text-white">Login here</a>
                             </div>
                         </form>
                     </div>

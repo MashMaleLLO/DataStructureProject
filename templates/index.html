@@ -1,12 +1,28 @@
 {% extends 'layout.html' %}
 {% load static from static %}
 {% block content %}
-    <br>
-    <h2>Explore Your ClassRoom</h2>
-    <p>dataStructProject</p>
-    <hr width = "50%" size = "10">
-    <!-- <h1>Please login</h1> -->
-    <!-- <div class="card" style="width: 18rem;">
+
+<style>
+    /* body {
+        margin: 0;
+        padding: 0;
+        background-color: #334042;
+        background-image: url("{% static 'b4.jpg' %}");
+        height: 100vh;
+    } */
+</style>
+
+<br>
+<div class="title page">
+    <h1 style="display: inline;"> <img src="{% static '15.png' %}" alt="15.png" width="70" height="auto "></h1>
+    <h1 style="display: inline;">&nbsp; Explore Your ClassRoom</h1>
+</div>
+<br>
+<p>Welcome, Enjoy your class and pay attention to your studies.</p>
+<br>
+<!-- <hr width = "50%" size = "10"> -->
+<!-- <h1>Please login</h1> -->
+<!-- <div class="card" style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
@@ -24,70 +40,113 @@
             </div>
           </div>
     </center> -->
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'datajpg.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Data Structure and Algorithum 2564</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">More Detail</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'net.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Computer Network 2564</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">More Detail</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'org.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Computer Organized and Assembly language 2564</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">More Detail</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'eppD.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Englsih for Professional Purpose 2564</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">More Detail</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'prob.jpg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Probability and Statistic 2564</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">More Detail</a>
-                </div>
+
+
+
+
+
+
+<!-- <div class="card text-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-primary border-success text-white"><b>Header</b></div>       
+        <div class="card-body">
+            <img src="{% static 'datajpg.jpg' %}" class="card-img-top" alt="..."style=" >
+            <h5 class="card-title">Primary card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div> -->
+
+
+
+
+
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+
+
+        <div class="card mx-3 my-3 " style="width: 18rem; border-radius: 25px; ">
+            <div class="card-header bg-transparent ">
+                <h5>DataStructure</h5>
+            </div> <br>
+            <img src="{% static 'datajpg.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Data Structure and Algorithum</h5> -->
+                <p class="card-text"> A data structure is a particular way of organizing data in a computer so that it
+                    can be used effectively.</p>
+                <a href="#" class="btn btn-dark text-white">More Detail</a>
             </div>
         </div>
+
+        <div class="card mx-3 my-3" style="width: 18rem; border-radius: 25px; ">
+            <div class="card-header bg-transparent">
+                <h5>ComputerNetwork</h5>
+            </div><br>
+            <img src="{% static 'net.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Computer Network</h5> -->
+                <p class="card-text">Computer network, two or more computers that are connected with one another for the
+                    purpose of communicating data electronically. </p>
+                <a href="#" class="btn btn-dark text-white">More Detail</a>
+            </div>
+        </div>
+
+        <div class="card mx-3 my-3" style="width: 18rem; border-radius: 25px; ">
+            <div class="card-header bg-transparent">
+                <h5>ComputerOrganized</h5>
+            </div><br>
+            <!-- <h5 class="card-title">Computer Organized and Assembly language</h5> -->
+            <div class="card-body">
+                <img src="{% static 'org.jpg' %}" class="card-img-top" alt="...">
+                <p class="card-text">Computer Organization is concerned with the structure and behaviour of a computer
+                    system as seen by the user.</p>
+                <a href="#" class="btn btn-dark text-white">More Detail</a>
+            </div>
+        </div>
+
+        <div class="card mx-3 my-3" style="width: 18rem; border-radius: 25px; ">
+            <div class="card-header bg-transparent">
+                <h5>Englsih for Professional Purpose</h5>
+            </div><br>
+            <img src="{% static 'eppD.png' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Englsih for Professional Purpose</h5> -->
+                <p class="card-text">A big part of learning English for professional purposes is to learn the jargon
+                    that you'll need to use and understand in your line of work. </p>
+                <a href="#" class="btn btn-dark text-white">More Detail</a>
+            </div>
+        </div>
+
+        <div class="card mx-3 my-3" style="width: 18rem; border-radius: 25px; ">
+            <div class="card-header bg-transparent">
+                <h5>Probability and Statistic</h5>
+            </div><br>
+            <img src="{% static 'prob.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <h5 class="card-title">Probability and Statistic</h5> -->
+                <p class="card-text">Probability tells us how often some event will happen after many repeated trials.
+                </p>
+                <a href="#" class="btn btn-dark text-white">More Detail</a>
+            </div>
+        </div>
+
     </div>
-    <!-- <h1>All Class Room</h1>
-    <ul>
-        {% for i in allClass %}
-        <li>
-            <p>{{i}}</p>
-        </li>
-        {% endfor %}    
-    </ul>
-    <h1>Class Room</h1>
-    <h2>Number of student in ClassRoom</h2>
-    <ul>
-        {% for i in allClass %}
-            <h3>{{i}}</h3>
-            {% if numinClass > 0%}
-                <p>Number of student = {{numinClass}}</p>
-            {% else %}
-                <p>Empty ClassRoom</p>
-            {% endif %}
-        {% endfor %}
-    </ul> -->
-    
-    
+</div>
+
+
+
+
+
+
+<!-- Footer -->
+
+<!-- Copyright -->
+<footer>
+<div class="text-center p-4" style="background-color: rgba(255, 255, 255, 0.05);">
+    © 2021 Copyright: MyClassroomChecker.com
+</div>
+<!-- Copyright -->
+</footer>
+
+<!-- Footer -->
+
 {% endblock %}

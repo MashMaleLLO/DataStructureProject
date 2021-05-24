@@ -78,7 +78,8 @@ urlpatterns = [
     path('problogin/probMinMaxID',views.probMinMaxID),
     path('problogin/probMaxMinID',views.probMaxMinID),
     path('problogin/probMinMaxDay',views.probMinMaxDay),
-    path('problogin/probMaxMinDay',views.probMaxMinDay)
+    path('problogin/probMaxMinDay',views.probMaxMinDay),
+    path('aboutus', views.aboutus)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
