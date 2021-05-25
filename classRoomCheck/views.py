@@ -923,6 +923,9 @@ def dataStructStart(request):
     f.close()
     return redirect('/dataStructlogin')
 
+def dataStructDetail(request):
+    return render(request, 'dataDetail.html')
+
 def comNetlogin(request):
     isStart = readClassStatus("isStartNet.txt")
     return render(request,'comNetlogin.html',{'allStudent':allStudent.items,'addFormed':addFormed, 'studentInComnet':studentInComnet.getlst(), 'isStart':isStart})
@@ -933,6 +936,9 @@ def comNetStart(request):
     print('Writing to file completed')
     f.close()
     return redirect('/comNetlogin')
+
+def comNetDetail(request):
+    return render(request, 'netDetail.html')
 
 def comOrglogin(request):
     isStart = readClassStatus("isStartOrg.txt")
@@ -945,6 +951,9 @@ def comOrgStart(request):
     f.close()
     return redirect('/comOrglogin')
 
+def comOrgDetail(request):
+    return render(request, 'orgDetail.html')
+
 def ePPlogin(request):
     isStart = readClassStatus("isStartEpp.txt")
     return render(request,'epplogin.html',{'allStudent':allStudent.items,'addFormed':addFormed,'studentInEpp':studentInEpp.getlst(),'isStart':isStart})
@@ -956,7 +965,8 @@ def ePPStart(request):
     f.close()
     return redirect('/epplogin')
 
-
+def eppDetail(request):
+    return render(request, 'eppDetail.html')
 
 def problogin(request):
     isStart = readClassStatus("isStartProb.txt")
@@ -968,6 +978,9 @@ def probStart(request):
     print('Writing to file completed')
     f.close()
     return redirect('/problogin')
+
+def probDetail(request):
+    return render(request, 'probDetail.html')
 
 def test(request):
     data = AllClassRooM.objects.all()

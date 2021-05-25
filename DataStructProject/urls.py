@@ -79,7 +79,13 @@ urlpatterns = [
     path('problogin/probMaxMinID',views.probMaxMinID),
     path('problogin/probMinMaxDay',views.probMinMaxDay),
     path('problogin/probMaxMinDay',views.probMaxMinDay),
-    path('aboutus', views.aboutus)
+    path('aboutus', views.aboutus),
+    path('dataDetail', views.dataStructDetail),
+    path('netDetail', views.comNetDetail),
+    path('orgDetail', views.comOrgDetail),
+    path('eppDetail', views.eppDetail),
+    path('probDetail', views.probDetail),
+    path('test001/',views.test001)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
