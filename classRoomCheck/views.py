@@ -841,6 +841,14 @@ def login(request):
         messages.info(request,'User not FOUND')
         return redirect('/')
 
+def getStart(request):
+    return render(request, 'getStart.html')
+
+def getTolog(request):
+    if request.user.is_authenticated:
+        return redirect('/home')
+    return redirect('/login')
+
 def logout(request):
     f = open('nowUser.txt', 'w', encoding="utf8")
     f.write("")
