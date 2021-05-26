@@ -1,44 +1,74 @@
 
 {% extends 'layout.html' %}
+{% load static from static %}
+<style>
+  .column {
+    float: left;
+    justify-content: center;
+    width: 20%;
+    padding: 10px;
+    height: 300px;
+    text-align: center;
+  }
 
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+</style>
 {% block content %}
+  <div class="mySlides">
+    <div class="container-fluid" style="background-image:url(https://i.pinimg.com/originals/68/64/78/686478094fcaa756279876ad39ab9561.jpg); height: 770px; background-repeat: no-repeat; background-size: cover;" >
+    </div>
+  </div>
 
-<h2> test </h2>
+  </div>
+  <div class="mySlides">
+    <div class="container-fluid" style="background-image:url(https://wallpapercave.com/wp/wp2044697.jpg); height: 770px; background-repeat: no-repeat; background-size: cover;" >
+    </div>
+  </div>
+  <div class="mySlides">
+    <div class="container-fluid" style="background-image:url(https://cutewallpaper.org/21/computer-science-engineering-wallpapers/Computer-Science-Wallpapers-77+-images-.jpg); height: 770px; background-repeat: no-repeat; background-size: cover;" >
+    </div>
+  </div>
+  <div class="mySlides">
+    <div class="container-fluid" style="background-image:url(https://www.springboard.com/library/static/cb92b35a5d50085b5a81b5a1e66bd46e/bbc2a/DSC-Article-datascientist-generalimage.png); height: 770px; background-repeat: no-repeat; background-size: cover;" >
+    </div>
+  </div>
+  <div class="mySlides">
+    <div class="container-fluid" style="background-image:url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701662920.jpg); height: 770px; background-repeat: no-repeat; background-size: cover;" >
+    </div>
+  </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Class Name</th>
-      <th scope="col">Student</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr> -->
-    {% for i in AllClassRooM %}
-      <tr>
-        <th scope="row">{{i.id}}</th>
-        <td>{{i.name}}</td>
-        <td>{{i.student}}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <script>
+    var myIndex = 0;
+    carousel();
+    
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      myIndex++;
+      if (myIndex > x.length) {myIndex = 1}    
+      x[myIndex-1].style.display = "block";  
+      setTimeout(carousel, 6500); 
+    }
+    </script>
+    
+
+    <script type="text/javascript">
+      $(document).on('ready', function() {
+        $('#slide').slick({
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+        });
+      });
+    </script>
 
 {% endblock %}

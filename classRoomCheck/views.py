@@ -1542,6 +1542,47 @@ def userInformation(request):
         studyIn = "None"
     return render(request, 'thisUserData.html',{'name':name,'id':idS,'email':thisEmail,'studyIn':studyIn})
 
+def userLink(request,name):
+    thisname = name
+    i = thisname.split()
+    User = get_user_model()
+    users = User.objects.all()
+    userlist = User.objects.values()
+    thisEmail = ''
+    nowClass = 999
+    studyIn = ""
+    nameIS = i[1] + " " + i[2]
+    idS = i[0]
+    j = 0
+    while j < len(allClassIndex):
+        for k in allClassIndex[j].getlst():
+            a = k.split()
+            if str(a[0]) == str(idS):
+                nowClass = j
+                break
+        j += 1
+    m = 1
+    while m < len(userlist):
+        if int(userlist[m]['id']) == int(idS):
+            thisEmail += str(userlist[m]['email'])
+            break
+        m += 1
+    print("Hiii",thisEmail)
+    if nowClass == 0:
+        studyIn = "DataStruct"
+    elif nowClass == 1:
+        studyIn = "Computer Network"
+    elif nowClass == 2:
+        studyIn = "Computer Organize"
+    elif nowClass == 3:
+        studyIn = "English for professional purpose"
+    elif nowClass == 4:
+        studyIn = "Probability and Statistic"
+    else:
+        studyIn = "None"
+    
+    return render(request, 'thisUserData.html',{'name':nameIS,'id':idS,'email':thisEmail,'studyIn':studyIn})
+
 def registerPage(request):
     # data = User.objects.order_by('id')
     User = get_user_model()
@@ -1652,4 +1693,4 @@ def addFormedRegisterAsTeach(request):
         return redirect('/registerAsTeach')
 
 def test001(request):
-    return render(request, 'test001.html')
+    return render(request, 'test003.html')
