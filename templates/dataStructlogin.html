@@ -124,7 +124,11 @@
             <br>
             {% for i in studentInData %}
                 <li>
-                    <p>{{i}}</p>
+                    {% if user.is_staff == 1 %}
+                        <p>{{i}} <a href="dataStructlogout/{{i.0}}{{i.1}}{{i.2}}{{i.3}}{{i.4}}{{i.5}}{{i.6}}{{i.7}}" >Remove from class</a></p>
+                    {% else %}
+                        <p>{{i}}</p>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

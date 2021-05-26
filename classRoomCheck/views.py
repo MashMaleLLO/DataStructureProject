@@ -838,8 +838,8 @@ def login(request):
         f.close()
         return redirect('/home')
     else:
-        messages.info(request,'User not FOUND')
-        return redirect('/')
+        messages.info(request,'User not FOUND or Password Incorrect')
+        return redirect('/loginGet')
 
 def getStart(request):
     return render(request, 'getStart.html')
@@ -1111,6 +1111,26 @@ def dataStructloginAddIDandName(request):
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
 
+def dataStructlogoutlink(request,fullName):
+    isStart = readClassStatus("isStartData.txt")
+    if fullName == "":
+        idS = readNowUser()[0]
+        name = readNowUser()[1]
+        if readNowUser()[2] == 1:
+            idS = request.POST['studentID']
+            name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'dataStructlogin.html',studentInData,0)
+        return render(request,'dataStructlogin.html',{'studentInData':studentInData.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
+            'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+    else:
+        i = fullName.split()
+        idS = i[0]
+        name = "kick"
+        thislis = []
+        thislis = visualize(0,idS,name,'dataStructlogin.html',studentInData,0)
+        return redirect('/dataStructlogin')
+
 def dataStructlogout(request):
     isStart = readClassStatus("isStartData.txt")
     idS = readNowUser()[0]
@@ -1122,6 +1142,9 @@ def dataStructlogout(request):
     thislis = visualize(0,idS,name,'dataStructlogin.html',studentInData,0)
     return render(request,'dataStructlogin.html',{'studentInData':studentInData.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+
+
+
 
 def dataEndClass(request):
     thislis = []
@@ -1195,6 +1218,25 @@ def comNetloginAddIDandName(request):
     return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
+def comNetlogoutlink(request,fullName):
+    isStart = readClassStatus("isStartNet.txt")
+    if fullName == '':
+        idS = readNowUser()[0]
+        name = readNowUser()[1]
+        if readNowUser()[2] == 1:
+            idS = request.POST['studentID']
+            name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'comNetlogin.html',studentInComnet,1)
+        return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
+            'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+    else:
+        idS = fullName
+        name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'comNetlogin.html',studentInComnet,1)
+        return redirect('/comNetlogin')
+
 def comNetlogout(request):
     isStart = readClassStatus("isStartNet.txt")
     idS = readNowUser()[0]
@@ -1206,6 +1248,7 @@ def comNetlogout(request):
     thislis = visualize(0,idS,name,'comNetlogin.html',studentInComnet,1)
     return render(request,'comNetlogin.html',{'studentInComnet':studentInComnet.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+
 
 def comNetEndClass(request):
     thislis = []
@@ -1274,6 +1317,25 @@ def comOrgloginAddIDandName(request):
     thislis = visualize(1,idS,name,'comOrglogin.html',studentInComOrg,2)
     return render(request,'comOrglogin.html',{'studentInComOrg':studentInComOrg.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+
+def comOrglogoutlink(request,fullName):
+    isStart = readClassStatus("isStartOrg.txt")
+    if fullName == "":
+        idS = readNowUser()[0]
+        name = readNowUser()[1]
+        if readNowUser()[2] == 1:
+            idS = request.POST['studentID']
+            name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'comOrglogin.html',studentInComOrg,2)
+        return render(request,'comOrglogin.html',{'studentInComOrg':studentInComOrg.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
+            'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+    else:
+        idS = fullName
+        name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'comOrglogin.html',studentInComOrg,2)
+        return redirect('/comOrglogin')
 
 def comOrglogout(request):
     isStart = readClassStatus("isStartOrg.txt")
@@ -1355,6 +1417,25 @@ def ePPloginAddIDandName(request):
     return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
+def ePPlogoutlink(request,fullName):
+    isStart = readClassStatus("isStartEpp.txt")
+    if fullName == "":
+        idS = readNowUser()[0]
+        name = readNowUser()[1]
+        if readNowUser()[2] == 1:
+            idS = request.POST['studentID']
+            name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'epplogin.html',studentInEpp,3)
+        return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
+            'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+    else:
+        idS = fullName
+        name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'epplogin.html',studentInEpp,3)
+        return redirect('/epplogin')
+
 def ePPlogout(request):
     isStart = readClassStatus("isStartEpp.txt")
     idS = readNowUser()[0]
@@ -1363,10 +1444,10 @@ def ePPlogout(request):
         idS = request.POST['studentID']
         name = 'kick'
     thislis = []
-    thislis = []
     thislis = visualize(0,idS,name,'epplogin.html',studentInEpp,3)
     return render(request,'epplogin.html',{'studentInEpp':studentInEpp.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+
 
 def ePPEndClass(request):
     thislis = []
@@ -1437,6 +1518,25 @@ def probloginAddIDandName(request):
     return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
         'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
 
+def problogoutlink(request,fullName):
+    isStart = readClassStatus("isStartProb.txt")
+    if fullName == "":
+        idS = readNowUser()[0]
+        name = readNowUser()[1]
+        if readNowUser()[2] == 1:
+            idS = request.POST['studentID']
+            name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'problogin.html',studentInProb,4)
+        return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
+            'alreadyRegister':thislis[4],'registerSucess':thislis[5],'alreadyInOtherClass':thislis[6],'isStart':isStart})
+    else:
+        idS = fullName
+        name = 'kick'
+        thislis = []
+        thislis = visualize(0,idS,name,'problogin.html',studentInProb,4)
+        return redirect('/problogin')
+
 def problogout(request):
     isStart = readClassStatus("isStartProb.txt")
     idS = readNowUser()[0]
@@ -1444,7 +1544,6 @@ def problogout(request):
     if readNowUser()[2] == 1:
         idS = request.POST['studentID']
         name = 'kick'
-    thislis = []
     thislis = []
     thislis = visualize(0,idS,name,'problogin.html',studentInProb,4)
     return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':thislis[1],'noInDataBase':thislis[2],'addFormed':thislis[3],
