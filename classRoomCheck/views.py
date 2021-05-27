@@ -855,7 +855,7 @@ def logout(request):
     print('Writing to file completed')
     f.close()
     auth.logout(request)
-    return redirect('/home')
+    return redirect('/')
 
 
 def information(request):
