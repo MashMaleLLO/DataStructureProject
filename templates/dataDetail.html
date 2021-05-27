@@ -1,16 +1,56 @@
 {% extends 'layout.html' %}
 {% load static from static %}
-
-
-
 {% block content %}
-    <h3>DataStructure</h3>
+
+
+<style>
+    .box {
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+        border-radius: 10px;
+        /* border: 2px solid black; */
+        padding: 20px;
+        text-align: center;
+    }
+
+    .boxPic {
+        background-color: #0dcaf0;
+        color: white;
+        border-radius: 10px;
+        /* border: 2px solid black; */
+        height: 500px;
+
+    }
+</style>
+
+<div class="container">
+
+    <div class="box my-4">
+        <h1 style="display: inline;"><b>DATA STRUCTURE AND ALGORITHM</b></h1>
+    </div>
+
+
+    <img src="https://miro.medium.com/max/1024/0*I5vtdhUqmRJ1zI1e.jpg" alt="..." width="100%" height="auto">
+    <br>
+    <p>An algorithm is a process or a set of rules required to perform calculations or some other problem-solving
+        operations especially by a computer.
+        The formal definition of an algorithm is that it contains the finite set of instructions which are being carried
+        in a specific order to perform the specific task.
+        It is not the complete program or code; it is just a solution (logic) of a problem, which can be represented
+        either as an informal description using
+        a Flowchart or Pseudocode.</p>
+    <br>
     {% if user.is_authenticated %}
-        <a href="/dataStructlogin" class="btn btn-dark text-white">Join Here</a>
+    <a href="/dataStructlogin" class="btn btn-dark text-white">Join Here</a>
     {% else %}
-        <h5>Please login First</h5>
-        <a href="/loginGet" class="btn btn-dark text-white">Login Here</a>
+    <h5>Please login First</h5>
+    <a href="/loginGet" class="btn btn-dark text-white">Login Here</a>
+    
     {% endif %}
 
-    
+
+</div>
+
+<br>
+
 {% endblock %}

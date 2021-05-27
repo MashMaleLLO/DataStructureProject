@@ -5,15 +5,16 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #212529;
+        background-color: #0dcaf0;
         height: 100vh;
     }
     #regis .container #regis-row #regis-column #regis-box {
         margin-top: 80px;
         max-width: 600px;
-        height: 620px;
+        height: 650px;
+        border-radius: 25px;
         /* border: 1px solid #9C9C9C; */
-        background-color: #0dcaf0;
+        background-color: #ffffff;
     }
     #regis .container #regis-row #regis-column #regis-box #regis-form {
         padding: 20px;
@@ -44,28 +45,29 @@
                             {% csrf_token %}
                             <br>
                             <h3 class="text-center text-dark">Register As Teacher</h3>
+                            <p  class="text-center text-dark">Please fill this from to create an account</p>
                             <div class = "from-group">
-                                <label for="" class="text-white">Username : </label><br>
+                                <label for="" class="text-dark">Username : </label><br>
                                 <input type="text" class = "form-control" name="userName">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-white">Name : </label><br>
+                                <label for="" class="text-dark">Name : </label><br>
                                 <input type="text" class = "form-control" name="studentName">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-white">Surname : </label><br>
+                                <label for="" class="text-dark">Surname : </label><br>
                                 <input type="text" class = "form-control" name="studentSurname">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-white">Email : </label><br>
+                                <label for="" class="text-dark">Email : </label><br>
                                 <input type="email" class = "form-control" name="email">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-white">Password : </label><br>
+                                <label for="" class="text-dark">Password : </label><br>
                                 <input type="password" class = "form-control" name="password">
                             </div>
                             <div class = "from-group">
-                                <label for="" class="text-white">Re-Password : </label><br>
+                                <label for="" class="text-dark">Re-Password : </label><br>
                                 <input type="password" class = "form-control" name="repassword">
                             </div>
                             <br>
@@ -73,7 +75,7 @@
                                 <input type="submit" class="btn btn-dark btn-md" value="Register">
                             </div>
                             <div id="login-link" class="text-right">
-                                <a href="/" class="text-white">Login here</a>
+                                <a href="/" class="text-dark">Login here</a>
                             </div>
                         </form>
                     </div>
@@ -81,13 +83,6 @@
             </div>
         </div>
     </div>
-    <ul>
-        <br>
-        {% for i in allUser %}
-            <li>
-                <p>{{i}}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    
 </body>
     
